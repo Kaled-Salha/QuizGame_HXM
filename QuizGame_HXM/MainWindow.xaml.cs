@@ -9,7 +9,11 @@ namespace QuizGame_HXM
     {
         public MainWindow()
         {
+
             InitializeComponent();
+
+
+
         }
     }
 }
