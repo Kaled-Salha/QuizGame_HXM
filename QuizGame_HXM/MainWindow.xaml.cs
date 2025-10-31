@@ -9,11 +9,12 @@ namespace QuizGame_HXM
     {
         public MainWindow()
         {
-
             InitializeComponent();
+        }
 
-
-
+        private void LoadQuiz_Click(object sender, RoutedEventArgs e)
+        {
+            // To be filled in
         }
     }
 }
