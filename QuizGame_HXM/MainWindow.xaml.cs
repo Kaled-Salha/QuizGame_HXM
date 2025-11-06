@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using QuizGame_HXM.Pages;
+using QuizGame_HXM.ViewModel;
+using System.Windows;
+
 
 namespace QuizGame_HXM
 {
@@ -12,9 +15,21 @@ namespace QuizGame_HXM
             InitializeComponent();
         }
 
-        private void LoadQuiz_Click(object sender, RoutedEventArgs e)
+        private async void LoadQuiz_Click(object sender, RoutedEventArgs e)
         {
-            // To be filled in
+            var vm = new PlayQuizViewModel();
+            await vm.LoadQuizAsync();
+            if (vm.Quiz != null)
+            {
+                var view = new PlayQuizView();
+                view.DataContext = vm;
+                MainContent.Content = view;
+            }
         }
+        private async void SaveQuiz_Click(object sender, RoutedEventArgs e)
+        {
+            // placeholder or actual logic
+        }
+
     }
 }

@@ -1,0 +1,186 @@
+﻿{
+  "Title": "MyQuiz",
+
+  "Questions": [
+    {
+      "QuestionText": "Who was the first president of the United States?",
+      "AnswerOptions": [ "George Washington", "Thomas Jefferson", "Abraham Lincoln" ],
+      "CorrectAnswerIndex": 0,
+      "Category": "History"
+    },
+    {
+      "QuestionText": "In which year did World War II end?",
+      "AnswerOptions": [ "1945", "1939", "1918" ],
+      "CorrectAnswerIndex": 0,
+      "Category": "History"
+    },
+    {
+      "QuestionText": "What empire was ruled by Julius Caesar?",
+      "AnswerOptions": [ "Greek", "Roman", "Ottoman" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "History"
+    },
+    {
+      "QuestionText": "Which wall came down in 1989?",
+      "AnswerOptions": [ "Berlin Wall", "Great Wall of China", "Hadrian's Wall" ],
+      "CorrectAnswerIndex": 0,
+      "Category": "History"
+    },
+    {
+      "QuestionText": "Who was the British Prime Minister during most of WWII?",
+      "AnswerOptions": [ "Winston Churchill", "Neville Chamberlain", "Margaret Thatcher" ],
+      "CorrectAnswerIndex": 0,
+      "Category": "History"
+    },
+    {
+      "QuestionText": "Where did the Industrial Revolution begin?",
+      "AnswerOptions": [ "France", "Germany", "United Kingdom" ],
+      "CorrectAnswerIndex": 2,
+      "Category": "History"
+    },
+    {
+      "QuestionText": "What is the capital of France?",
+      "AnswerOptions": [ "Paris", "Madrid", "Berlin" ],
+      "CorrectAnswerIndex": 0,
+      "Category": "Geography"
+    },
+    {
+      "QuestionText": "Which continent is the Sahara Desert in?",
+      "AnswerOptions": [ "Asia", "Africa", "Australia" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Geography"
+    },
+    {
+      "QuestionText": "What is the largest country by land area?",
+      "AnswerOptions": [ "USA", "China", "Russia" ],
+      "CorrectAnswerIndex": 2,
+      "Category": "Geography"
+    },
+    {
+      "QuestionText": "Which ocean is on the west coast of the United States?",
+      "AnswerOptions": [ "Atlantic", "Pacific", "Indian" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Geography"
+    },
+    {
+      "QuestionText": "Mount Everest lies on the border of which two countries?",
+      "AnswerOptions": [ "India and China", "Nepal and China", "Bhutan and India" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Geography"
+    },
+    {
+      "QuestionText": "Which river runs through Egypt?",
+      "AnswerOptions": [ "Amazon", "Nile", "Tigris" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Geography"
+    },
+    {
+      "QuestionText": "What gas do plants absorb from the atmosphere?",
+      "AnswerOptions": [ "Oxygen", "Carbon Dioxide", "Nitrogen" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Science"
+    },
+    {
+      "QuestionText": "What planet is known as the Red Planet?",
+      "AnswerOptions": [ "Mars", "Venus", "Jupiter" ],
+      "CorrectAnswerIndex": 0,
+      "Category": "Science"
+    },
+    {
+      "QuestionText": "What is H2O more commonly known as?",
+      "AnswerOptions": [ "Salt", "Hydrogen", "Water" ],
+      "CorrectAnswerIndex": 2,
+      "Category": "Science"
+    },
+    {
+      "QuestionText": "How many bones are in the adult human body?",
+      "AnswerOptions": [ "206", "201", "250" ],
+      "CorrectAnswerIndex": 0,
+      "Category": "Science"
+    },
+    {
+      "QuestionText": "What part of the plant conducts photosynthesis?",
+      "AnswerOptions": [ "Roots", "Leaves", "Stem" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Science"
+    },
+    {
+      "QuestionText": "What type of energy is produced by moving electrons?",
+      "AnswerOptions": [ "Thermal", "Nuclear", "Electrical" ],
+      "CorrectAnswerIndex": 2,
+      "Category": "Science"
+    },
+    {
+      "QuestionText": "What does CPU stand for?",
+      "AnswerOptions": [ "Central Performance Unit", "Central Processing Unit", "Computer Primary Unit" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Technology"
+    },
+    {
+      "QuestionText": "What language is primarily used for web development?",
+      "AnswerOptions": [ "Python", "HTML", "C++" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Technology"
+    },
+    {
+      "QuestionText": "Who founded Microsoft?",
+      "AnswerOptions": [ "Steve Jobs", "Mark Zuckerberg", "Bill Gates" ],
+      "CorrectAnswerIndex": 2,
+      "Category": "Technology"
+    },
+    {
+      "QuestionText": "What is the name of the largest social media platform (by users)?",
+      "AnswerOptions": [ "Facebook", "Twitter", "Snapchat" ],
+      "CorrectAnswerIndex": 0,
+      "Category": "Technology"
+    },
+    {
+      "QuestionText": "Which company makes the iPhone?",
+      "AnswerOptions": [ "Samsung", "Google", "Apple" ],
+      "CorrectAnswerIndex": 2,
+      "Category": "Technology"
+    },
+    {
+      "QuestionText": "What does HTTP stand for?",
+      "AnswerOptions": [ "HyperText Transfer Protocol", "High Tech Text Processing", "Home Transfer Protocol" ],
+      "CorrectAnswerIndex": 0,
+      "Category": "Technology"
+    },
+    {
+      "QuestionText": "Which part of the potato plant do we eat?",
+      "AnswerOptions": [ "Leaves", "Stem", "Root tuber" ],
+      "CorrectAnswerIndex": 2,
+      "Category": "Potato"
+    },
+    {
+      "QuestionText": "Which country is the largest producer of potatoes?",
+      "AnswerOptions": [ "Russia", "India", "China" ],
+      "CorrectAnswerIndex": 2,
+      "Category": "Potato"
+    },
+    {
+      "QuestionText": "What nutrient is most abundant in potatoes?",
+      "AnswerOptions": [ "Protein", "Carbohydrates", "Fat" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Potato"
+    },
+    {
+      "QuestionText": "In gaming, calling someone a 'potato' usually means?",
+      "AnswerOptions": [ "They’re overpowered", "They’re bad at the game", "They’re cheating" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Potato"
+    },
+    {
+      "QuestionText": "What does 'potato PC' refer to?",
+      "AnswerOptions": [ "A great gaming rig", "A slow, underpowered computer", "A PC shaped like a potato" ],
+      "CorrectAnswerIndex": 1,
+      "Category": "Potato"
+    },
+    {
+      "QuestionText": "In gamer slang, 'potato aim' means?",
+      "AnswerOptions": [ "Perfect aim", "Inconsistent aim", "Garbage aim" ],
+      "CorrectAnswerIndex": 2,
+      "Category": "Potato"
+    }
+  ]
+}

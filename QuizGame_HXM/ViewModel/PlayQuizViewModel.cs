@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using QuizGame_HXM.Models;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -35,24 +36,32 @@ namespace QuizGame_HXM.ViewModel
 
         public void NextQuestion(int selectedIndex)
         {
+            Debug.WriteLine($"Click received. CurrentQuestion null? {CurrentQuestion == null}");
+
+            if (CurrentQuestion == null)
+            {
+                Debug.WriteLine("Exiting early: no CurrentQuestion");
+                return;
+            }
+
             TotalAnswered++;
 
             if (selectedIndex == CurrentQuestion.CorrectAnswerIndex)
             {
                 TotalCorrect++;
-
+                Debug.WriteLine("Correct answer!");
             }
+
             int percent = (int)((double)TotalCorrect / TotalAnswered * 100);
-            ScoreText = $"Rätt: {TotalCorrect} / {TotalAnswered} ({percent}%)";
+            ScoreText = $"Correct: {TotalCorrect} / {TotalAnswered} ({percent}%)";
+            Debug.WriteLine($"Updated score: {ScoreText}");
 
             CurrentQuestion = Quiz.GetRandomQuestion();
+            Debug.WriteLine($"Next question: {(CurrentQuestion == null ? "null" : CurrentQuestion.QuestionText)}");
+
             OnPropertyChanged(nameof(CurrentQuestion));
-
-
-
-
-
         }
+
         public async Task LoadQuizAsync()
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -63,8 +72,7 @@ namespace QuizGame_HXM.ViewModel
 
                 string filePath = dialog.FileName;
                 string json = await File.ReadAllTextAsync(filePath);
-                Quiz quiz = JsonSerializer.Deserialize<Quiz>(json);
-                Quiz = quiz;
+                Quiz = JsonSerializer.Deserialize<Quiz>(json);
                 CurrentQuestion = Quiz.GetRandomQuestion();
                 OnPropertyChanged(nameof(CurrentQuestion));
                 OnPropertyChanged(nameof(Quiz));
@@ -73,7 +81,20 @@ namespace QuizGame_HXM.ViewModel
 
         }
         public async Task SaveQuizAsync()
-        { }
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "JSON files (*.json)|*.json";
+            bool? result = saveDialog.ShowDialog();
+            if (result == true)
+            {
+                string filePath = saveDialog.FileName;
+                Quiz quiz = this.Quiz;
+                string json = JsonSerializer.Serialize(quiz);
+                await File.WriteAllTextAsync(filePath, json);
+
+
+            }
+        }
         public void OnPropertyChanged([CallerMemberName] string name = "")
         {
             if (PropertyChanged != null)

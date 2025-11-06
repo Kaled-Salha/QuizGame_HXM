@@ -9,19 +9,21 @@ namespace QuizGame_HXM.Pages
     /// </summary>
     public partial class PlayQuizView : UserControl
     {
-        public PlayQuizViewModel ViewModel { get; set; }
+       
 
         public PlayQuizView()
         {
             InitializeComponent();
-            ViewModel = new PlayQuizViewModel();
-            DataContext = ViewModel;
+            
         }
 
         private void AnswerButton_Click(object sender, RoutedEventArgs e)
         {
-            int selectedIndex = int.Parse((sender as Button).Tag.ToString());
-            ViewModel.NextQuestion(selectedIndex);
+            if (DataContext is PlayQuizViewModel vm)
+            {
+                int selectedIndex = int.Parse((sender as Button).Tag.ToString());
+                vm.NextQuestion(selectedIndex);
+            }
         }
     }
 

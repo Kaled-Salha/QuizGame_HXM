@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="QuizGame_HXM.Pages.StartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuizGame_HXM.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+            <TextBlock Text="Quiz Game" FontSize="26" FontWeight="Bold" Margin=" 0, 0, 0, 20"/>
+            <Button Content="Play Quiz" Height="40" Margin="0 10"/>
+            <Button Content="Create Quiz" Height="40" Margin="0 10"/>
+            <Button Content="Exit" Height="40" Margin="0 10"/>
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>
