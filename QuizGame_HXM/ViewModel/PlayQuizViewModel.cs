@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using QuizGame_HXM.Models;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -16,7 +15,15 @@ namespace QuizGame_HXM.ViewModel
         public int TotalCorrect { get; set; }
         public int TotalAnswered { get; set; }
 
-
+        public event EventHandler BackToMenuRequested;
+        private void OnBackToMenuRequested()
+        {
+            BackToMenuRequested?.Invoke(this, EventArgs.Empty);
+        }
+        public void RequestBackToMenu()
+        {
+            OnBackToMenuRequested();
+        }
 
 
         private string _scoreText;
@@ -36,11 +43,10 @@ namespace QuizGame_HXM.ViewModel
 
         public void NextQuestion(int selectedIndex)
         {
-            Debug.WriteLine($"Click received. CurrentQuestion null? {CurrentQuestion == null}");
+
 
             if (CurrentQuestion == null)
             {
-                Debug.WriteLine("Exiting early: no CurrentQuestion");
                 return;
             }
 
@@ -49,15 +55,14 @@ namespace QuizGame_HXM.ViewModel
             if (selectedIndex == CurrentQuestion.CorrectAnswerIndex)
             {
                 TotalCorrect++;
-                Debug.WriteLine("Correct answer!");
+
             }
 
             int percent = (int)((double)TotalCorrect / TotalAnswered * 100);
             ScoreText = $"Correct: {TotalCorrect} / {TotalAnswered} ({percent}%)";
-            Debug.WriteLine($"Updated score: {ScoreText}");
+
 
             CurrentQuestion = Quiz.GetRandomQuestion();
-            Debug.WriteLine($"Next question: {(CurrentQuestion == null ? "null" : CurrentQuestion.QuestionText)}");
 
             OnPropertyChanged(nameof(CurrentQuestion));
         }

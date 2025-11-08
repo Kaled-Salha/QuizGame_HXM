@@ -13,6 +13,8 @@ namespace QuizGame_HXM
         public MainWindow()
         {
             InitializeComponent();
+            var view = new StartView();
+            MainContent.Content = view;
         }
 
         private async void LoadQuiz_Click(object sender, RoutedEventArgs e)

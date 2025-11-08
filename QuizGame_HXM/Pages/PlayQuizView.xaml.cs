@@ -9,12 +9,12 @@ namespace QuizGame_HXM.Pages
     /// </summary>
     public partial class PlayQuizView : UserControl
     {
-       
+
 
         public PlayQuizView()
         {
             InitializeComponent();
-            
+
         }
 
         private void AnswerButton_Click(object sender, RoutedEventArgs e)
@@ -24,6 +24,15 @@ namespace QuizGame_HXM.Pages
                 int selectedIndex = int.Parse((sender as Button).Tag.ToString());
                 vm.NextQuestion(selectedIndex);
             }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(DataContext is PlayQuizViewModel vm)
+            {
+
+            }
+
         }
     }
 

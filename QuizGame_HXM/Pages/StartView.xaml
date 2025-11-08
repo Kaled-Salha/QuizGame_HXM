@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
-            <TextBlock Text="Quiz Game" FontSize="26" FontWeight="Bold" Margin=" 0, 0, 0, 20"/>
-            <Button Content="Play Quiz" Height="40" Margin="0 10"/>
-            <Button Content="Create Quiz" Height="40" Margin="0 10"/>
-            <Button Content="Exit" Height="40" Margin="0 10"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="top" Margin="20">
+            <TextBlock Text="Quiz Game" FontSize="26" FontWeight="Bold" Margin=" 0, 0, 0, 100"/>
+            <Button Content="Play Quiz" Height="40" Margin="0, 10" Click="PlayQuiz_Click"/>
+            <Button Content="Create Quiz" Height="40" Margin="0, 10" Click="CreateQuiz_Click"/>
+            <Button Content="Exit" Height="40" Margin="0, 10" Click="Exit_Click"/>
 
 
         </StackPanel>
