@@ -6,19 +6,28 @@ namespace QuizGame_HXM.Pages
 {
     public partial class CreateQuizView : UserControl
     {
-        private CreateQuizViewModel vm;
-
         public CreateQuizView()
         {
             InitializeComponent();
-            vm = new CreateQuizViewModel();
-            this.DataContext = vm;
+            DataContext = new CreateQuizViewModel();
         }
 
         private void AddQuestion_Click(object sender, RoutedEventArgs e)
         {
-            vm.AddQuestion();
+            if (DataContext is CreateQuizViewModel vm)
+            {
+                vm.AddQuestion();
+            }
         }
+        private void BackToMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = Window.GetWindow(this) as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.MainContent.Content = new StartView();
+            }
+        }
+
 
         private async void SaveQuiz_Click(object sender, RoutedEventArgs e)
         {

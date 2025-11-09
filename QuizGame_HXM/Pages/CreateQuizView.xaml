@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:QuizGame_HXM.Pages"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="800">
-    <Grid Margin="20">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -14,11 +15,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Quiz title -->
         <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,10">
             <TextBlock Text="Quiz Title" FontWeight="Bold"/>
             <TextBox Text="{Binding QuizTitle, UpdateSourceTrigger=PropertyChanged}" Width="300"/>
         </StackPanel>
 
+        <!-- Question + Answers + Category -->
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,10,0,10">
             <TextBlock Text="Question Text" FontWeight="Bold"/>
             <TextBox Text="{Binding QuestionText, UpdateSourceTrigger=PropertyChanged}" Width="500"/>
@@ -30,13 +33,22 @@
 
             <TextBlock Text="Correct Answer Index (0-2)" Margin="0,10,0,0"/>
             <TextBox Text="{Binding CorrectAnswerIndex}" Width="50"/>
+
+            <!-- ✅ New Category Field -->
+            <TextBlock Text="Category" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TextBox Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="0,2"/>
         </StackPanel>
 
+        <!-- Buttons -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,10" HorizontalAlignment="Left">
             <Button Content="Add Question" Click="AddQuestion_Click" Margin="0,0,10,0"/>
             <Button Content="Save Quiz" Click="SaveQuiz_Click"/>
+            <Button Content="Back to Menu" Width="120" Margin="10,0,0,0" Click="BackToMenu_Click"/>
+
         </StackPanel>
 
+        <!-- List of questions -->
         <ListBox Grid.Row="3" ItemsSource="{Binding Questions}" DisplayMemberPath="QuestionText" />
     </Grid>
+    </ScrollViewer>
 </UserControl>

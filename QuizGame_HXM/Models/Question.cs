@@ -7,6 +7,8 @@
         public int CorrectAnswerIndex { get; set; }
         public string Category { get; set; }
 
+        public Question() { }
+
         public Question(string questionText, List<string> answerOptions, int correctAnswerIndex, string category)
         {
             QuestionText = questionText;

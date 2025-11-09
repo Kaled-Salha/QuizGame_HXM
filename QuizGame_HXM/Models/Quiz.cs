@@ -29,6 +29,15 @@ namespace QuizGame_HXM.Models
             return Questions[randomIndex];
         }
 
+        public Quiz FilterByCategories(List<string> selectedCategories)
+        {
+            var filtered = new Quiz(this.Title);
+            filtered.Questions = this.Questions
+                .Where(q => selectedCategories.Contains(q.Category))
+                .ToList();
+            return filtered;
+        }
+
         public async Task SaveAsync(string format)
         {
             string json = JsonSerializer.Serialize(this);
