@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <!--<Button Content="Load Quiz" Width="120" Height="40"
+        <!--<Button x:Name="LoadQuizButton" Content="Load Quiz" 
+                Width="120" Height="40"
                 HorizontalAlignment="Left" VerticalAlignment="Top"
                 Margin="10"
                 Click="LoadQuiz_Click"/>-->

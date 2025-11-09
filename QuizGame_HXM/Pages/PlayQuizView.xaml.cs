@@ -28,9 +28,9 @@ namespace QuizGame_HXM.Pages
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if(DataContext is PlayQuizViewModel vm)
+            if (DataContext is PlayQuizViewModel vm)
             {
-
+                vm.RequestBackToMenu();
             }
 
         }

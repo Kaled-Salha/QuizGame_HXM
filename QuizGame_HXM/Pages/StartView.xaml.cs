@@ -1,5 +1,4 @@
-﻿using QuizGame_HXM.ViewModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace QuizGame_HXM.Pages
@@ -13,20 +12,27 @@ namespace QuizGame_HXM.Pages
         {
             InitializeComponent();
         }
-
         private void PlayQuiz_Click(object sender, RoutedEventArgs e)
         {
             var mainWindow = Window.GetWindow(this) as MainWindow;
-            var playQuizView = new PlayQuizView();
-            var vm = new PlayQuizViewModel();
-            playQuizView.DataContext = vm;
-            mainWindow.MainContent.Content = playQuizView;
-
+            mainWindow?.LoadQuiz_Click(sender, e); // call the real handler
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+
+
+
+        private void CreateQuiz_Click(object sender, RoutedEventArgs e)
         {
-
+            var mainWindow = Window.GetWindow(this) as MainWindow;
+            var view = new CreateQuizView();
+            mainWindow.MainContent.Content = view;
         }
+
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
     }
 }
