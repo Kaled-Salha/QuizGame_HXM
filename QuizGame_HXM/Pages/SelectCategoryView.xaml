@@ -13,19 +13,20 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- Title -->
         <TextBlock Text="Select Categories to Play"
                    FontSize="20"
                    FontWeight="Bold"
                    HorizontalAlignment="Center"
                    Margin="0,0,0,20" />
 
+        <!-- Category List -->
         <ListBox x:Name="CategoryList"
                  Grid.Row="1"
                  SelectionMode="Multiple"
-                 FontSize="16">
-            
-        </ListBox>
+                 FontSize="16" />
 
+        <!-- Start Button -->
         <Button Content="Start Quiz"
                 Grid.Row="2"
                 Width="120" Height="35"

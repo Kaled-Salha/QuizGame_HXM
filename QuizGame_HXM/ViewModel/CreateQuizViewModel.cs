@@ -11,8 +11,7 @@ namespace QuizGame_HXM.ViewModel
 {
     public class CreateQuizViewModel : INotifyPropertyChanged
     {
-
-        //        FIELDS         //
+        // ======== FIELDS ========
 
         private string _quizTitle;
         public string QuizTitle
@@ -63,10 +62,30 @@ namespace QuizGame_HXM.ViewModel
             set { _category = value; OnPropertyChanged(); }
         }
 
+        private string _imagePath;
+        public string ImagePath
+        {
+            get => _imagePath;
+            set { _imagePath = value; OnPropertyChanged(); }
+        }
+
         public ObservableCollection<Question> Questions { get; set; } = new ObservableCollection<Question>();
 
 
-        //       METHODS         //
+        // ======== METHODS ========
+
+        public void BrowseImage()
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                ImagePath = dialog.FileName;
+            }
+        }
 
         public void AddQuestion()
         {
@@ -91,7 +110,8 @@ namespace QuizGame_HXM.ViewModel
                 this.QuestionText,
                 new List<string> { Answer1, Answer2, Answer3 },
                 this.CorrectAnswerIndex,
-                this.Category
+                this.Category,
+                this.ImagePath
             );
 
             Questions.Add(question);
@@ -103,20 +123,19 @@ namespace QuizGame_HXM.ViewModel
             Answer3 = string.Empty;
             CorrectAnswerIndex = 0;
             Category = string.Empty;
+            ImagePath = string.Empty;
 
-            // Notify UI
             OnPropertyChanged(nameof(QuestionText));
             OnPropertyChanged(nameof(Answer1));
             OnPropertyChanged(nameof(Answer2));
             OnPropertyChanged(nameof(Answer3));
             OnPropertyChanged(nameof(CorrectAnswerIndex));
             OnPropertyChanged(nameof(Category));
+            OnPropertyChanged(nameof(ImagePath));
         }
-
 
         public async Task SaveQuizAsync()
         {
-            // === Validation ===
             if (string.IsNullOrWhiteSpace(QuizTitle))
             {
                 MessageBox.Show("Please enter a quiz title before saving.", "Validation Error");
@@ -129,37 +148,31 @@ namespace QuizGame_HXM.ViewModel
                 return;
             }
 
-            // === Create quiz ===
             var quiz = new Quiz(this.QuizTitle)
             {
                 Questions = Questions.ToList()
             };
 
-            SaveFileDialog dialog = new SaveFileDialog
-            {
-                Filter = "JSON files (*.json)|*.json",
-                FileName = QuizTitle + ".json"
-            };
+            // === Save to AppData ===
+            string folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string appFolder = Path.Combine(folder, "QuizGame_HXM");
+            Directory.CreateDirectory(appFolder);
 
-            if (dialog.ShowDialog() == true)
-            {
-                string json = JsonSerializer.Serialize(quiz);
-                await File.WriteAllTextAsync(dialog.FileName, json);
-                MessageBox.Show("Quiz saved successfully.", "Success");
+            string filePath = Path.Combine(appFolder, $"{QuizTitle}.json");
 
-                // reset fields
-                QuizTitle = string.Empty;
-                Questions.Clear();
+            string json = JsonSerializer.Serialize(quiz);
+            await File.WriteAllTextAsync(filePath, json);
 
-                OnPropertyChanged(nameof(QuizTitle));
-                OnPropertyChanged(nameof(Questions));
-            }
+            MessageBox.Show($"Quiz saved to AppData folder:\n{filePath}", "Success");
+
+            QuizTitle = string.Empty;
+            Questions.Clear();
+
+            OnPropertyChanged(nameof(QuizTitle));
+            OnPropertyChanged(nameof(Questions));
         }
 
-
-
-        //  INotifyPropertyChanged
-
+        // ======== Notify Property Changes ========
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string prop = "")

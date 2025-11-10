@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace QuizGame_HXM.Models
 {
@@ -12,8 +15,8 @@ namespace QuizGame_HXM.Models
         {
             Title = title;
             Questions = new List<Question>();
-
         }
+
         public void AddQuestion(Question question)
         {
             Questions.Add(question);
@@ -22,33 +25,30 @@ namespace QuizGame_HXM.Models
         public Question GetRandomQuestion()
         {
             Random rnd = new Random();
-            int randomIndex = rnd.Next(0, Questions.Count);
-
-
-
-            return Questions[randomIndex];
+            int index = rnd.Next(0, Questions.Count);
+            return Questions[index];
         }
 
         public Quiz FilterByCategories(List<string> selectedCategories)
         {
-            var filtered = new Quiz(this.Title);
-            filtered.Questions = this.Questions
+            var filteredQuiz = new Quiz(this.Title);
+            filteredQuiz.Questions = this.Questions
                 .Where(q => selectedCategories.Contains(q.Category))
                 .ToList();
-            return filtered;
+
+            return filteredQuiz;
         }
 
         public async Task SaveAsync(string format)
         {
             string json = JsonSerializer.Serialize(this);
-            string folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string appFolder = Path.Combine(folder, "QuizGame_HXM");
-            Directory.CreateDirectory(appFolder);
-            string filePath = Path.Combine(appFolder, $"{Title}.json");
 
+            string appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string folder = Path.Combine(appData, "QuizGame_HXM");
+            Directory.CreateDirectory(folder);
+
+            string filePath = Path.Combine(folder, $"{Title}.json");
             await File.WriteAllTextAsync(filePath, json);
-
-
         }
 
         public static async Task<Quiz> LoadAsync(string filePath, string format)
@@ -56,13 +56,6 @@ namespace QuizGame_HXM.Models
             string json = await File.ReadAllTextAsync(filePath);
             Quiz quiz = JsonSerializer.Deserialize<Quiz>(json);
             return quiz;
-
-
         }
-
-
-
-
-
     }
 }

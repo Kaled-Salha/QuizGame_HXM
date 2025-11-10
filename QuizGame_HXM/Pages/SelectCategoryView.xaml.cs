@@ -2,23 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuizGame_HXM.Pages
 {
-    /// <summary>
-    /// Interaction logic for SelectCategoryView.xaml
-    /// </summary>
     public partial class SelectCategoryView : UserControl
     {
         private Quiz _originalQuiz;
@@ -30,11 +18,15 @@ namespace QuizGame_HXM.Pages
             InitializeComponent();
             _originalQuiz = quiz;
 
+            // Get unique categories (excluding empty/null ones)
             var uniqueCategories = quiz.Questions
                 .Select(q => q.Category)
                 .Where(c => !string.IsNullOrWhiteSpace(c))
                 .Distinct()
                 .ToList();
+
+            // Add special "All Categories" option
+            uniqueCategories.Insert(0, "All Categories");
 
             CategoryList.ItemsSource = uniqueCategories;
         }
@@ -51,8 +43,17 @@ namespace QuizGame_HXM.Pages
                 return;
             }
 
+            // If "All Categories" is selected, include all valid categories
+            if (selected.Contains("All Categories"))
+            {
+                selected = _originalQuiz.Questions
+                    .Select(q => q.Category)
+                    .Where(c => !string.IsNullOrWhiteSpace(c))
+                    .Distinct()
+                    .ToList();
+            }
+
             CategoriesConfirmed?.Invoke(this, selected);
         }
-
     }
 }

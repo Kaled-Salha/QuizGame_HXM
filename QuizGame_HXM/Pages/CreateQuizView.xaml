@@ -3,52 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:QuizGame_HXM.Pages"
              mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <!-- Quiz title -->
-        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,10">
-            <TextBlock Text="Quiz Title" FontWeight="Bold"/>
-            <TextBox Text="{Binding QuizTitle, UpdateSourceTrigger=PropertyChanged}" Width="300"/>
-        </StackPanel>
+            <!-- Quiz title -->
+            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,10">
+                <TextBlock Text="Quiz Title" FontWeight="Bold"/>
+                <TextBox Text="{Binding QuizTitle, UpdateSourceTrigger=PropertyChanged}" Width="300"/>
+            </StackPanel>
 
-        <!-- Question + Answers + Category -->
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,10,0,10">
-            <TextBlock Text="Question Text" FontWeight="Bold"/>
-            <TextBox Text="{Binding QuestionText, UpdateSourceTrigger=PropertyChanged}" Width="500"/>
+            <!-- Question + Answers + Category -->
+            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,10,0,10">
+                <TextBlock Text="Question Text" FontWeight="Bold"/>
+                <TextBox Text="{Binding QuestionText, UpdateSourceTrigger=PropertyChanged}" Width="500"/>
 
-            <TextBlock Text="Answers (3 options):" Margin="0,10,0,0"/>
-            <TextBox Text="{Binding Answer1, UpdateSourceTrigger=PropertyChanged}" Width="400" Margin="0,2"/>
-            <TextBox Text="{Binding Answer2, UpdateSourceTrigger=PropertyChanged}" Width="400" Margin="0,2"/>
-            <TextBox Text="{Binding Answer3, UpdateSourceTrigger=PropertyChanged}" Width="400" Margin="0,2"/>
+                <TextBlock Text="Answers (3 options):" Margin="0,10,0,0"/>
+                <TextBox Text="{Binding Answer1, UpdateSourceTrigger=PropertyChanged}" Width="400" Margin="0,2"/>
+                <TextBox Text="{Binding Answer2, UpdateSourceTrigger=PropertyChanged}" Width="400" Margin="0,2"/>
+                <TextBox Text="{Binding Answer3, UpdateSourceTrigger=PropertyChanged}" Width="400" Margin="0,2"/>
 
-            <TextBlock Text="Correct Answer Index (0-2)" Margin="0,10,0,0"/>
-            <TextBox Text="{Binding CorrectAnswerIndex}" Width="50"/>
+                <TextBlock Text="Correct Answer Index (0-2)" Margin="0,10,0,0"/>
+                <TextBox Text="{Binding CorrectAnswerIndex}" Width="50"/>
 
-            <!-- ✅ New Category Field -->
-            <TextBlock Text="Category" FontWeight="Bold" Margin="0,10,0,0"/>
-            <TextBox Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="0,2"/>
-        </StackPanel>
+                <!-- Category -->
+                <TextBlock Text="Category" FontWeight="Bold" Margin="0,10,0,0"/>
+                <TextBox Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="0,2"/>
 
-        <!-- Buttons -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,10" HorizontalAlignment="Left">
-            <Button Content="Add Question" Click="AddQuestion_Click" Margin="0,0,10,0"/>
-            <Button Content="Save Quiz" Click="SaveQuiz_Click"/>
-            <Button Content="Back to Menu" Width="120" Margin="10,0,0,0" Click="BackToMenu_Click"/>
+                <!-- Image selection -->
+                <TextBlock Text="Image (optional)" FontWeight="Bold" Margin="0,10,0,0"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="Add Image" Click="BrowseImage_Click" Width="100" Margin="0,0,10,0"/>
+                    <TextBlock Text="{Binding ImagePath}" Width="300" TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
 
-        </StackPanel>
+                <!-- Image preview -->
+                <Border BorderThickness="1" BorderBrush="Gray" Margin="0,10,0,0" Width="150" Height="150">
+                    <Image Source="{Binding ImagePath}" Stretch="Uniform"/>
+                </Border>
+            </StackPanel>
 
-        <!-- List of questions -->
-        <ListBox Grid.Row="3" ItemsSource="{Binding Questions}" DisplayMemberPath="QuestionText" />
-    </Grid>
+            <!-- Buttons -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,10" HorizontalAlignment="Left">
+                <Button Content="Add Question" Click="AddQuestion_Click" Margin="0,0,10,0"/>
+                <Button Content="Save Quiz" Click="SaveQuiz_Click"/>
+                <Button Content="Back to Menu" Width="120" Margin="10,0,0,0" Click="BackToMenu_Click"/>
+            </StackPanel>
+
+            <!-- List of questions -->
+            <ListBox Grid.Row="3" ItemsSource="{Binding Questions}" DisplayMemberPath="QuestionText" />
+        </Grid>
     </ScrollViewer>
 </UserControl>

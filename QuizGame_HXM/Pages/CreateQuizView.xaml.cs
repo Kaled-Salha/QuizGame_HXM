@@ -42,5 +42,13 @@ namespace QuizGame_HXM.Pages
                 }
             }
         }
+        private void BrowseImage_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is CreateQuizViewModel vm)
+            {
+                vm.BrowseImage();
+            }
+        }
+
     }
 }

@@ -1,12 +1,12 @@
-﻿using Microsoft.Win32;
-using QuizGame_HXM.Models;
+﻿using QuizGame_HXM.Models;
+using QuizGame_HXM.Pages;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-
 
 namespace QuizGame_HXM.ViewModel
 {
@@ -24,11 +24,8 @@ namespace QuizGame_HXM.ViewModel
             set { _feedbackColor = value; OnPropertyChanged(); }
         }
 
-
         public event EventHandler BackToMenuRequested;
-
         private void OnBackToMenuRequested() => BackToMenuRequested?.Invoke(this, EventArgs.Empty);
-
         public void RequestBackToMenu() => OnBackToMenuRequested();
 
         private string _scoreText;
@@ -73,12 +70,16 @@ namespace QuizGame_HXM.ViewModel
             set { _feedbackMessage = value; OnPropertyChanged(); }
         }
 
+        // ✅ New property for question text binding
+        public string QuestionText => CurrentQuestion?.QuestionText ?? "";
+
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string name = "") =>
+        private void OnPropertyChanged([CallerMemberName] string name = "")
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
-
-        //    CORE METHODS       //
+        // ====== Gameplay Logic ======
 
         private void UpdateAnswerOptions()
         {
@@ -122,30 +123,40 @@ namespace QuizGame_HXM.ViewModel
             if (Quiz == null || Quiz.Questions.Count == 0)
                 return;
 
+            // ✅ Show credits when all questions are answered
+            if (TotalAnswered >= Quiz.Questions.Count)
+            {
+                var mainWindow = Application.Current.MainWindow as MainWindow;
+                if (mainWindow != null)
+                {
+                    mainWindow.MainContent.Content = new CreditsView(false); // false = hide Back to Menu button
+                }
+                return;
+            }
+
             CurrentQuestion = Quiz.GetRandomQuestion();
             UpdateAnswerOptions();
+
+            // ✅ Notify UI that question text changed
+            OnPropertyChanged(nameof(QuestionText));
 
             FeedbackMessage = string.Empty;
             FeedbackColor = Brushes.Black;
             IsAnswerSelected = false;
-
-            OnPropertyChanged(nameof(CurrentQuestion));
         }
-
-
-        //    QUIZ FILE HANDLING //
 
         public async Task LoadQuizAsync()
         {
-            OpenFileDialog dialog = new OpenFileDialog
+            var dialog = new Microsoft.Win32.OpenFileDialog
             {
                 Filter = "JSON files (*.json)|*.json"
             };
 
             if (dialog.ShowDialog() == true)
             {
-                string json = await File.ReadAllTextAsync(dialog.FileName);
-                Quiz = JsonSerializer.Deserialize<Quiz>(json);
+                string filePath = dialog.FileName;
+                string json = await File.ReadAllTextAsync(filePath);
+                Quiz = System.Text.Json.JsonSerializer.Deserialize<Quiz>(json);
 
                 if (Quiz != null)
                 {
@@ -155,27 +166,14 @@ namespace QuizGame_HXM.ViewModel
             }
         }
 
-        public async Task SaveQuizAsync()
-        {
-            SaveFileDialog saveDialog = new SaveFileDialog
-            {
-                Filter = "JSON files (*.json)|*.json"
-            };
-
-            if (saveDialog.ShowDialog() == true)
-            {
-                string json = JsonSerializer.Serialize(this.Quiz);
-                await File.WriteAllTextAsync(saveDialog.FileName, json);
-            }
-        }
-
-
-        //        COMMANDS       //
+        // ====== Commands ======
 
         public ICommand AnswerCommand => new RelayCommand(param =>
         {
-            int index = Convert.ToInt32(param);
-            SelectAnswer(index);
+            if (int.TryParse(param?.ToString(), out int index))
+            {
+                SelectAnswer(index);
+            }
         });
 
         public ICommand NextCommand => new RelayCommand(_ => LoadNextQuestion());
