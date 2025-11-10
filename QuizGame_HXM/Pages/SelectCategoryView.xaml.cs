@@ -18,14 +18,14 @@ namespace QuizGame_HXM.Pages
             InitializeComponent();
             _originalQuiz = quiz;
 
-            // Get unique categories (excluding empty/null ones)
+            
             var uniqueCategories = quiz.Questions
                 .Select(q => q.Category)
                 .Where(c => !string.IsNullOrWhiteSpace(c))
                 .Distinct()
                 .ToList();
 
-            // Add special "All Categories" option
+            
             uniqueCategories.Insert(0, "All Categories");
 
             CategoryList.ItemsSource = uniqueCategories;

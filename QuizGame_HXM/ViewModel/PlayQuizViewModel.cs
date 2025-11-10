@@ -70,7 +70,7 @@ namespace QuizGame_HXM.ViewModel
             set { _feedbackMessage = value; OnPropertyChanged(); }
         }
 
-        // ✅ New property for question text binding
+        // New property for question text binding
         public string QuestionText => CurrentQuestion?.QuestionText ?? "";
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -123,7 +123,7 @@ namespace QuizGame_HXM.ViewModel
             if (Quiz == null || Quiz.Questions.Count == 0)
                 return;
 
-            // ✅ Show credits when all questions are answered
+            // Show credits when all questions are answered
             if (TotalAnswered >= Quiz.Questions.Count)
             {
                 var mainWindow = Application.Current.MainWindow as MainWindow;
@@ -137,7 +137,7 @@ namespace QuizGame_HXM.ViewModel
             CurrentQuestion = Quiz.GetRandomQuestion();
             UpdateAnswerOptions();
 
-            // ✅ Notify UI that question text changed
+            // Notify UI that question text changed
             OnPropertyChanged(nameof(QuestionText));
 
             FeedbackMessage = string.Empty;

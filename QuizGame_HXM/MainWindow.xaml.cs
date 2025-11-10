@@ -31,7 +31,7 @@ namespace QuizGame_HXM
 
                     var playView = new PlayQuizView { DataContext = filteredVM };
 
-                    // ✅ Load question after view is ready
+                    // Load question after view is ready
                     playView.Loaded += (sender, e) =>
                     {
                         filteredVM.LoadNextQuestion();
